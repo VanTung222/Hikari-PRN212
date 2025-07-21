@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikariApp", "HikariApp\HikariApp.csproj", "{17A66D22-0C7E-480B-AD44-01F64CA8E4C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikariDataAccess", "HikariDataAccess\HikariDataAccess.csproj", "{CA83BAD6-F76B-4AC9-A218-9501DC83374F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikariBusiness", "HikariBusiness\HikariBusiness.csproj", "{59773A90-24C9-49F0-9053-C21D97647B07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{17A66D22-0C7E-480B-AD44-01F64CA8E4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17A66D22-0C7E-480B-AD44-01F64CA8E4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17A66D22-0C7E-480B-AD44-01F64CA8E4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA83BAD6-F76B-4AC9-A218-9501DC83374F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA83BAD6-F76B-4AC9-A218-9501DC83374F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA83BAD6-F76B-4AC9-A218-9501DC83374F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA83BAD6-F76B-4AC9-A218-9501DC83374F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59773A90-24C9-49F0-9053-C21D97647B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59773A90-24C9-49F0-9053-C21D97647B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59773A90-24C9-49F0-9053-C21D97647B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59773A90-24C9-49F0-9053-C21D97647B07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
