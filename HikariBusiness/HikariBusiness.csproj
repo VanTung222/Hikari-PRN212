@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HikariDataAccess\HikariDataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

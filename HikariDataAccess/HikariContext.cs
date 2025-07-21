@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccessLayer.Entities;
+using HikariDataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer;
 
@@ -43,8 +44,17 @@ public partial class HikariContext : DbContext
     public virtual DbSet<UserAccount> UserAccounts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(local);Database=Hikari;UID=sa;PWD=Tung@123456789;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer(GetConnectionString());
 
+    private string GetConnectionString()
+    {
+        IConfiguration config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build();
+        var strConn = config["ConnectionStrings:DefaultConnectionStringDB"];
+        return strConn;
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Course>(entity =>
