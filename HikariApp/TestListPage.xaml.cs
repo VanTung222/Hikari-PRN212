@@ -46,8 +46,13 @@ namespace HikariApp
             Button btn = sender as Button;
             if (btn != null)
             {
+                // Lấy TestId từ Tag của nút (đảm bảo bạn đã gắn Tag trong XAML của TestListPage)
                 int testId = (int)btn.Tag;
-                MessageBox.Show($"Bạn đã chọn làm bài kiểm tra có ID: {testId}", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Mở trang QuizPage và truyền TestId
+                QuizPage quizPage = new QuizPage(testId);
+                quizPage.ShowDialog(); // ShowDialog() để cửa sổ QuizPage chặn cửa sổ TestListPage
+                                       // và TestListPage sẽ tiếp tục khi QuizPage đóng
             }
         }
 
