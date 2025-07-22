@@ -1,0 +1,149 @@
+<Page x:Class="HikariApp.Views.Admin.CourseManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikariApp.Views.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CourseManagementPage">
+
+    <Page.Resources>
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="PrimaryBlue" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="Green" Color="#5CB85C"/>
+        <SolidColorBrush x:Key="Orange" Color="#F0AD4E"/>
+        <SolidColorBrush x:Key="Red" Color="#D9534F"/>
+        <SolidColorBrush x:Key="LightGray" Color="#F5F5F5"/>
+        
+        <!-- Button Styles -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource Green}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background" Value="#6C757D"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="30,20,30,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Filter Section -->
+        <Border Grid.Row="0" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Tên Khóa Học" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Name="CourseNameTextBox" Grid.Column="1" Margin="0,0,20,0" Height="30" VerticalContentAlignment="Center"/>
+                
+                <TextBlock Grid.Column="2" Text="Học Phí Từ" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Name="MinFeeTextBox" Grid.Column="3" Margin="0,0,20,0" Height="30" VerticalContentAlignment="Center"/>
+                
+                <TextBlock Grid.Column="4" Text="Học Phí Đến" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Name="MaxFeeTextBox" Grid.Column="5" Margin="0,0,20,0" Height="30" VerticalContentAlignment="Center"/>
+                
+                <TextBlock Grid.Column="6" Text="Ngày Bắt Đầu" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <DatePicker Name="StartDatePicker" Grid.Column="7" Margin="0,0,20,0" Height="30" VerticalContentAlignment="Center"/>
+                
+                <StackPanel Grid.Column="9" Orientation="Horizontal">
+                    <Button Name="SearchButton" Content="Tìm Kiếm" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,10,0" Click="SearchButton_Click"/>
+                    <Button Name="ResetButton" Content="Đặt Lại" Style="{StaticResource SecondaryButtonStyle}" Click="ResetButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,20">
+            <Button Content="+ Thêm Khóa Học" Style="{StaticResource PrimaryButtonStyle}" Click="AddCourseButton_Click"/>
+        </StackPanel>
+        
+        <!-- Data Table -->
+        <Border Grid.Row="2" Background="White" CornerRadius="8" Padding="0" Height="500">
+            <DataGrid x:Name="CourseDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" 
+                      HeadersVisibility="Column" GridLinesVisibility="Horizontal" 
+                      AlternatingRowBackground="#F8F9FA" RowBackground="White"
+                      RowHeight="45" FontSize="13" BorderThickness="0"
+                      VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80"/>
+                    <DataGridTextColumn Header="TÊN KHÓA HỌC" Binding="{Binding Title}" Width="250"/>
+                    <DataGridTemplateColumn Header="HỌC PHÍ" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource Green}" CornerRadius="12" Padding="8,4">
+                                    <TextBlock Text="{Binding Fee}" Foreground="White" FontSize="10" 
+                                               HorizontalAlignment="Center" FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="THỜI LƯỢNG" Binding="{Binding Duration}" Width="100"/>
+                    <DataGridTextColumn Header="NGÀY BẮT ĐẦU" Binding="{Binding StartDate}" Width="120"/>
+                    <DataGridTextColumn Header="NGÀY KẾT THÚC" Binding="{Binding EndDate}" Width="120"/>
+                    <DataGridTemplateColumn Header="TRẠNG THÁI" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource Green}" CornerRadius="12" Padding="8,4">
+                                    <TextBlock Text="{Binding Status}" Foreground="White" FontSize="10" 
+                                               HorizontalAlignment="Center" FontWeight="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="HÀNH ĐỘNG" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="👁" Background="{StaticResource PrimaryBlue}" Foreground="White" 
+                                            Width="30" Height="25" Margin="2" BorderThickness="0" 
+                                            Click="ViewButton_Click" ToolTip="Xem chi tiết"/>
+                                    <Button Content="✏" Background="{StaticResource Orange}" Foreground="White" 
+                                            Width="30" Height="25" Margin="2" BorderThickness="0" 
+                                            Click="EditButton_Click" ToolTip="Chỉnh sửa"/>
+                                    <Button Content="🗑" Background="{StaticResource Red}" Foreground="White" 
+                                            Width="30" Height="25" Margin="2" BorderThickness="0" 
+                                            Click="DeleteButton_Click" ToolTip="Vô hiệu hóa"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        
+        <!-- Pagination -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Name="PrevButton" Content="&lt; Trước" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,0" Click="PrevButton_Click" IsEnabled="False"/>
+            <TextBlock Name="PageInfo" Text="Trang 1 / 1" VerticalAlignment="Center" Margin="10,0"/>
+            <Button Name="NextButton" Content="Sau &gt;" Style="{StaticResource SecondaryButtonStyle}" Margin="10,0,0,0" Click="NextButton_Click" IsEnabled="False"/>
+        </StackPanel>
+    </Grid>
+</Page>

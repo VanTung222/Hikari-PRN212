@@ -1,0 +1,295 @@
+<Page x:Class="HikariApp.Views.Admin.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HikariApp.Views.Admin"
+      mc:Ignorable="d" 
+      Title="DashboardPage">
+
+    <Page.Resources>
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="PrimaryBlue" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="LightGray" Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="DarkGray" Color="#666666"/>
+        <SolidColorBrush x:Key="Green" Color="#5CB85C"/>
+        <SolidColorBrush x:Key="Orange" Color="#F0AD4E"/>
+        <SolidColorBrush x:Key="Red" Color="#D9534F"/>
+
+        <!-- Card Style -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#E0E0E0" Direction="270" ShadowDepth="4" Opacity="0.3" BlurRadius="12"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="30,20,30,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30">
+            <Border Background="{StaticResource PrimaryBlue}" CornerRadius="8" Padding="12,8">
+                <TextBlock Text="ℹ️ Bảng Điều Khiển" Foreground="White" FontSize="16" FontWeight="SemiBold"/>
+            </Border>
+        </StackPanel>
+
+        <!-- Statistics Cards -->
+        <Grid Grid.Row="1" Margin="0,0,0,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Total Users Card -->
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="{StaticResource PrimaryBlue}" CornerRadius="50" Width="50" Height="50" Margin="0,0,15,0">
+                            <TextBlock Text="👥" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="UserCountText" Text="27" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}"/>
+                            <TextBlock Text="TỔNG NGƯỜI DÙNG" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Medium"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Courses Card -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="{StaticResource Green}" CornerRadius="50" Width="50" Height="50" Margin="0,0,15,0">
+                            <TextBlock Text="📚" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="CourseCountText" Text="15" FontSize="28" FontWeight="Bold" Foreground="{StaticResource Green}"/>
+                            <TextBlock Text="TỔNG KHÓA HỌC" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Medium"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Payments Card -->
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="{StaticResource Orange}" CornerRadius="50" Width="50" Height="50" Margin="0,0,15,0">
+                            <TextBlock Text="💰" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="PaymentCountText" Text="21" FontSize="28" FontWeight="Bold" Foreground="{StaticResource Orange}"/>
+                            <TextBlock Text="TỔNG THANH TOÁN" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Medium"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Reviews Card -->
+            <Border Grid.Column="3" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="{StaticResource Red}" CornerRadius="50" Width="50" Height="50" Margin="0,0,15,0">
+                            <TextBlock Text="⭐" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="ReviewCountText" Text="10" FontSize="28" FontWeight="Bold" Foreground="{StaticResource Red}"/>
+                            <TextBlock Text="TỔNG ĐÁNH GIÁ" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Medium"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            </Grid>
+
+        <!-- Charts Section -->
+        <Grid Grid.Row="2" Margin="0,0,0,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- User Growth Chart -->
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Tăng Trưởng Người Dùng Theo Tháng" FontSize="16" FontWeight="Bold" Margin="0,0,0,20" Foreground="{StaticResource DarkGray}"/>
+                    <Canvas Height="250" Background="White">
+                        <!-- Chart Area with smooth curve -->
+                        <Polygon Points="30,220 60,200 90,180 120,160 150,140 180,120 210,100 240,80 270,100 300,120 330,140 360,160 390,180 420,200 450,220" 
+                                 Fill="#FFE5B4" Stroke="{StaticResource Orange}" StrokeThickness="3" Opacity="0.3"/>
+                        <Polyline Points="30,220 60,200 90,180 120,160 150,140 180,120 210,100 240,80 270,100 300,120 330,140 360,160 390,180 420,200 450,220" 
+                                  Stroke="{StaticResource Orange}" StrokeThickness="3"/>
+                        
+                        <!-- Data points -->
+                        <Ellipse Canvas.Left="240" Canvas.Top="76" Width="8" Height="8" Fill="{StaticResource Orange}"/>
+                        <TextBlock Canvas.Left="235" Canvas.Top="60" Text="Người Dùng Mới" FontSize="10" Foreground="{StaticResource Orange}" FontWeight="Bold"/>
+
+                        <!-- X-axis labels -->
+                        <TextBlock Canvas.Left="30" Canvas.Top="230" Text="Th1" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="90" Canvas.Top="230" Text="Th2" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="150" Canvas.Top="230" Text="Th3" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="210" Canvas.Top="230" Text="Th4" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="270" Canvas.Top="230" Text="Th5" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="330" Canvas.Top="230" Text="Th6" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="390" Canvas.Top="230" Text="Th7" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="450" Canvas.Top="230" Text="Th8" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        
+                        <!-- Y-axis labels -->
+                        <TextBlock Canvas.Left="5" Canvas.Top="80" Text="10" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="120" Text="8" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="160" Text="6" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="200" Text="4" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="220" Text="0" FontSize="10" Foreground="{StaticResource DarkGray}"/>
+                    </Canvas>
+                </StackPanel>
+            </Border>
+
+            <!-- Revenue Chart -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Doanh Thu Theo Tháng" FontSize="16" FontWeight="Bold" Margin="0,0,0,20" Foreground="{StaticResource DarkGray}"/>
+                    <Canvas Height="250" Background="White">
+                        <!-- Bar Chart with better styling -->
+                        <Rectangle Canvas.Left="30" Canvas.Top="150" Width="20" Height="70" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="60" Canvas.Top="120" Width="20" Height="100" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="90" Canvas.Top="130" Width="20" Height="90" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="120" Canvas.Top="140" Width="20" Height="80" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="150" Canvas.Top="160" Width="20" Height="60" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="180" Canvas.Top="170" Width="20" Height="50" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="210" Canvas.Top="180" Width="20" Height="40" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="240" Canvas.Top="190" Width="20" Height="30" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="270" Canvas.Top="185" Width="20" Height="35" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="300" Canvas.Top="175" Width="20" Height="45" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="330" Canvas.Top="165" Width="20" Height="55" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+                        <Rectangle Canvas.Left="360" Canvas.Top="155" Width="20" Height="65" Fill="{StaticResource PrimaryBlue}" RadiusX="2" RadiusY="2"/>
+
+                        <!-- X-axis labels -->
+                        <TextBlock Canvas.Left="30" Canvas.Top="230" Text="Th1" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="60" Canvas.Top="230" Text="Th2" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="90" Canvas.Top="230" Text="Th3" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="120" Canvas.Top="230" Text="Th4" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="150" Canvas.Top="230" Text="Th5" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="180" Canvas.Top="230" Text="Th6" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="210" Canvas.Top="230" Text="Th7" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="240" Canvas.Top="230" Text="Th8" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="270" Canvas.Top="230" Text="Th9" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="300" Canvas.Top="230" Text="Th10" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="330" Canvas.Top="230" Text="Th11" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="360" Canvas.Top="230" Text="Th12" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        
+                        <!-- Legend -->
+                        <TextBlock Canvas.Left="30" Canvas.Top="20" Text="Doanh Thu (VNĐ)" FontSize="10" Foreground="{StaticResource PrimaryBlue}" FontWeight="Bold"/>
+                        
+                        <!-- Y-axis values -->
+                        <TextBlock Canvas.Left="5" Canvas.Top="120" Text="40 tr" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="150" Text="30 tr" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="180" Text="20 tr" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="5" Canvas.Top="210" Text="10 tr" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock Canvas.Left="15" Canvas.Top="220" Text="0" FontSize="9" Foreground="{StaticResource DarkGray}"/>
+                    </Canvas>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Bottom Section -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Recent Courses -->
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Text="📚 Khóa Học Gần Đây" FontSize="16" FontWeight="Bold" Foreground="{StaticResource DarkGray}"/>
+                    </StackPanel>
+                    <StackPanel x:Name="RecentCoursesPanel">
+                        <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" Padding="0,12">
+                            <TextBlock Text="• Khóa học lập trình C#" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+                        </Border>
+                        <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" Padding="0,12">
+                            <TextBlock Text="• Khóa học thiết kế UI/UX" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+                        </Border>
+                        <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" Padding="0,12">
+                            <TextBlock Text="• Khóa học cơ sở dữ liệu" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+                        </Border>
+                        <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" Padding="0,12">
+                            <TextBlock Text="• Thanh Toán Gần Đây" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+                        </Border>
+                        <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" Padding="0,12">
+                            <TextBlock Text="• Thông Báo Gần Đây" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- System Overview -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="📊 Tổng Quan Hệ Thống" FontSize="16" FontWeight="Bold" Margin="0,0,0,20" Foreground="{StaticResource DarkGray}"/>
+                    <Grid>
+                        <Canvas Height="200" Width="200" HorizontalAlignment="Center">
+                            <!-- Donut Chart with better styling -->
+                            <Ellipse Width="150" Height="150" Canvas.Left="25" Canvas.Top="25" 
+                                     Fill="Transparent" Stroke="{StaticResource PrimaryBlue}" StrokeThickness="25"
+                                     StrokeDashArray="47,31" StrokeDashOffset="0"/>
+                            <Ellipse Width="150" Height="150" Canvas.Left="25" Canvas.Top="25" 
+                                     Fill="Transparent" Stroke="{StaticResource Orange}" StrokeThickness="25" 
+                                     StrokeDashArray="26,52" StrokeDashOffset="47"/>
+                            <Ellipse Width="150" Height="150" Canvas.Left="25" Canvas.Top="25" 
+                                     Fill="Transparent" Stroke="{StaticResource Green}" StrokeThickness="25" 
+                                     StrokeDashArray="19,59" StrokeDashOffset="73"/>
+                            <Ellipse Width="150" Height="150" Canvas.Left="25" Canvas.Top="25" 
+                                     Fill="Transparent" Stroke="{StaticResource Red}" StrokeThickness="25" 
+                                     StrokeDashArray="13,65" StrokeDashOffset="92"/>
+                            
+                            <!-- Center text -->
+                            <TextBlock Canvas.Left="85" Canvas.Top="90" Text="73" FontSize="24" FontWeight="Bold" 
+                                       HorizontalAlignment="Center" Foreground="{StaticResource DarkGray}"/>
+                            <TextBlock Canvas.Left="70" Canvas.Top="115" Text="TỔNG CỘNG" FontSize="10" 
+                                       HorizontalAlignment="Center" Foreground="{StaticResource DarkGray}"/>
+                        </Canvas>
+                        
+                        <!-- Legend -->
+                        <StackPanel Margin="0,20,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                <Ellipse Width="12" Height="12" Fill="{StaticResource PrimaryBlue}" Margin="0,0,8,0"/>
+                                <TextBlock Text="Người Dùng" FontSize="12" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <TextBlock Text="27" FontSize="12" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                <Ellipse Width="12" Height="12" Fill="{StaticResource Green}" Margin="0,0,8,0"/>
+                                <TextBlock Text="Khóa Học" FontSize="12" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <TextBlock Text="15" FontSize="12" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                <Ellipse Width="12" Height="12" Fill="{StaticResource Orange}" Margin="0,0,8,0"/>
+                                <TextBlock Text="Thanh Toán" FontSize="12" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <TextBlock Text="21" FontSize="12" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                <Ellipse Width="12" Height="12" Fill="{StaticResource Red}" Margin="0,0,8,0"/>
+                                <TextBlock Text="Đánh Giá" FontSize="12" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <TextBlock Text="10" FontSize="12" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                </Border>
+            </Grid>
+    </Grid>
+</Page>
