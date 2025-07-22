@@ -1,0 +1,149 @@
+<Window x:Class="HikariApp.Views.Admin.AdminMasterLayout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikariApp.Views.Admin"
+        mc:Ignorable="d"
+        Title="Hikari Admin Dashboard" 
+        WindowState="Maximized" 
+        WindowStartupLocation="CenterScreen"
+        MinHeight="600" MinWidth="1024">
+
+    <Window.Resources>
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="PrimaryBlue" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="SidebarBlue" Color="#2E5BBA"/>
+        <SolidColorBrush x:Key="LightGray" Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="DarkGray" Color="#666666"/>
+        <SolidColorBrush x:Key="Green" Color="#5CB85C"/>
+        <SolidColorBrush x:Key="Orange" Color="#F0AD4E"/>
+        <SolidColorBrush x:Key="Red" Color="#D9534F"/>
+
+        <!-- Button Style -->
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3A6BC7"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Active Button Style -->
+        <Style x:Key="ActiveSidebarButtonStyle" TargetType="Button" BasedOn="{StaticResource SidebarButtonStyle}">
+            <Setter Property="Background" Value="#3A6BC7"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="White" BorderBrush="#EEEEEE" BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock x:Name="PageTitle" Text="📊 Bảng Điều Khiển" FontSize="24" FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}"/>
+                    <Border Background="Orange" CornerRadius="12" Padding="8,4" Margin="20,0,0,0">
+                        <TextBlock Text="⚠️" Foreground="White" FontSize="12"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="Vũ Lê Duy" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Views/Admin/assets/img/avatar.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="739*"/>
+                <ColumnDefinition Width="36*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0" Background="{StaticResource SidebarBlue}">
+                <StackPanel>
+                    <!-- Logo Section -->
+                    <StackPanel Orientation="Horizontal" Margin="20" VerticalAlignment="Top">
+                        <Ellipse Width="140" Height="140">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Views/Admin/assets/img/logo.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text=" HIKARI" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Navigation Menu -->
+                    <StackPanel Margin="0,20,0,20">
+                        <Button x:Name="DashboardBtn" Style="{StaticResource ActiveSidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📊" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Dashboard"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="AccountManagementBtn" Style="{StaticResource SidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="👥" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Quản lý tài khoản"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="CourseManagementBtn" Style="{StaticResource SidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📚" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Quản lý Khóa Học"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="PaymentManagementBtn" Style="{StaticResource SidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="💰" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Quản lý Thanh Toán"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ReviewManagementBtn" Style="{StaticResource SidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⭐" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Quản lý Đánh Giá"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="DiscountManagementBtn" Style="{StaticResource SidebarButtonStyle}" Click="NavigateToPage">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🏷️" FontSize="16" Margin="0,0,10,20"/>
+                                <TextBlock Text="Quản lý Giảm Giá"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- User Profile at Bottom -->
+                    <StackPanel Orientation="Horizontal" Margin="20" VerticalAlignment="Bottom">
+                        <Border CornerRadius="20" Width="210" Height="138">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/Views/Admin/assets/img/learning.jpg" />
+                            </Border.Background>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Main Content Frame -->
+            <Frame x:Name="MainContentFrame" Grid.Column="1" Background="{StaticResource LightGray}" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -4,7 +4,7 @@ using HikariDataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLayer;
+namespace HikariDataAccess;
 
 public partial class HikariContext : DbContext
 {
