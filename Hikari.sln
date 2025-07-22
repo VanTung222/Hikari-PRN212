@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikariDataAccess", "HikariD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikariBusiness", "HikariBusiness\HikariBusiness.csproj", "{59773A90-24C9-49F0-9053-C21D97647B07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{84E92476-6D07-4679-B9D2-C4B12B30CAF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{59773A90-24C9-49F0-9053-C21D97647B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59773A90-24C9-49F0-9053-C21D97647B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59773A90-24C9-49F0-9053-C21D97647B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84E92476-6D07-4679-B9D2-C4B12B30CAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E92476-6D07-4679-B9D2-C4B12B30CAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E92476-6D07-4679-B9D2-C4B12B30CAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E92476-6D07-4679-B9D2-C4B12B30CAF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="HikariApp.Teacher.ManageDocument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#FFF8F9FA">
+    <Grid Margin="40">
+        <StackPanel>
+            <TextBlock Text="📄 Quản Lý Tài Liệu" FontSize="28" FontWeight="Bold" Margin="0,0,0,30"/>
+            <Button Content="⬆️ Tải tài liệu mới" Width="180" Height="40" Margin="0,0,0,20" Click="UploadDocument_Click"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="DocumentList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" BorderBrush="#FFEEEEEE" BorderThickness="1" CornerRadius="12" Margin="0,0,0,15" Padding="25">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Title}" Grid.Column="0" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Description}" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding UploadedBy}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding UploadDate}" Grid.Column="3"/>
+                                    <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                        <Button Content="👁️ Xem" Width="60" Height="30" FontSize="11" Margin="3" Click="ViewDocument_Click"/>
+                                        <Button Content="⬇️ Tải" Width="60" Height="30" FontSize="11" Margin="3" Click="DownloadDocument_Click"/>
+                                        <Button Content="🗑️ Xóa" Width="60" Height="30" FontSize="11" Margin="3" Background="#FFFF5722" Click="DeleteDocument_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>

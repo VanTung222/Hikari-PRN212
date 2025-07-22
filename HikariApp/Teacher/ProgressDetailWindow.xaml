@@ -1,0 +1,41 @@
+<Window x:Class="HikariApp.Teacher.ProgressDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chi tiết tiến độ học sinh" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFF8F9FA" Margin="20">
+        <StackPanel>
+            <TextBlock Text="Chi tiết tiến độ học sinh" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+            <!-- Thông tin học sinh đẹp hơn -->
+            <Border Background="White" CornerRadius="12" Padding="20" Margin="0,0,0,20" BorderBrush="#FFCCCCCC" BorderThickness="1">
+                <DockPanel>
+                    <Ellipse Width="70" Height="70" DockPanel.Dock="Left" Margin="0,0,20,0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding AvatarUrl, FallbackValue=/HikariApp/Teacher/Resources/avatar.png}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel>
+                        <TextBlock><Run Text="Họ tên: "/><Run x:Name="txtFullName" FontWeight="Bold"/></TextBlock>
+                        <TextBlock><Run Text="Email: "/><Run x:Name="txtEmail" FontWeight="Bold"/></TextBlock>
+                        <TextBlock><Run Text="Ngày sinh: "/><Run x:Name="txtBirthDate" FontWeight="Bold"/></TextBlock>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <TextBlock Text="Khoá học đã đăng ký" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <ListBox x:Name="CourseList" DisplayMemberPath="Course.Title" Height="120" SelectionChanged="CourseList_SelectionChanged"/>
+            <TextBlock Text="Tiến độ từng bài học trong khoá" FontWeight="Bold" FontSize="16" Margin="0,10,0,10"/>
+            <Border Background="White" CornerRadius="10" Padding="10" BorderBrush="#FFCCCCCC" BorderThickness="1">
+                <ScrollViewer Height="260">
+                    <DataGrid x:Name="ProgressList" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" RowHeight="38" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Bài học" Binding="{Binding Lesson.Title}" Width="2*"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding CompletionStatus}" Width="1.2*"/>
+                            <DataGridTextColumn Header="Điểm" Binding="{Binding Score}" Width="1*"/>
+                            <DataGridTextColumn Header="Phản hồi" Binding="{Binding Feedback}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Border>
+            <Button Content="Đóng" Width="90" Height="34" Margin="0,20,0,0" HorizontalAlignment="Right" Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window> 
