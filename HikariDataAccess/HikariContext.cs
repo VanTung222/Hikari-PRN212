@@ -49,14 +49,12 @@ public partial class HikariContext : DbContext
     private string GetConnectionString()
     {
         IConfiguration config = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
+                    .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", true, true)
                     .Build();
         var strConn = config["ConnectionStrings:DefaultConnectionStringDB"];
-
         return strConn;
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Course>(entity =>

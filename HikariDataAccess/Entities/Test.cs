@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccessLayer.Entities;
+namespace HikariDataAccess.Entities;
 
 public partial class Test
 {
