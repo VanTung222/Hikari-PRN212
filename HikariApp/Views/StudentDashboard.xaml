@@ -1,0 +1,476 @@
+<Window x:Class="HikariApp.Views.StudentDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hikari - Trang học viên" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Navigation Button Style -->
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFF0D0"/>
+                    <Setter Property="Foreground" Value="#FF8C00"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#FFF0D0"/>
+                    <Setter Property="Foreground" Value="#FF8C00"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Icon Button Style -->
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F5F5F5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Action Button Style -->
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Primary Button Style -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF8C00"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E67E00"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Outline Button Style -->
+        <Style x:Key="OutlineButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF8C00"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FF8C00"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFF0D0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Support Button Style -->
+        <Style x:Key="SupportButton" TargetType="Button">
+            <Setter Property="Background" Value="#EEEEEE"/>
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#DDDDDD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Sidebar -->
+        <Border Grid.Column="0" Background="#FFF8E6" Margin="0,0,0,-389">
+            <StackPanel>
+                <!-- Logo -->
+                <StackPanel Orientation="Horizontal" Margin="20,20,0,30">
+                    <Border Width="70" Height="70" Background="#FF8C00" CornerRadius="35">
+                        <TextBlock Text="H" FontSize="40" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center" Margin="10,0,0,0">
+                        <TextBlock Text="HIKARI" FontSize="24" FontWeight="Bold" Foreground="#FF8C00"/>
+                        <TextBlock Text="JAPAN" FontSize="18" Foreground="#FF8C00"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Navigation Menu -->
+                <StackPanel Margin="0,10">
+                    <Button x:Name="btnDashboard" Style="{StaticResource NavButton}" IsEnabled="False">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Trang chủ"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnMyCourses" Style="{StaticResource NavButton}" Click="BtnMyCourses_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE133;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Khóa học của tôi"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnLessons" Style="{StaticResource NavButton}" Click="BtnLessons_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE714;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Bài học"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnExercises" Style="{StaticResource NavButton}" Click="BtnExercises_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0" RenderTransformOrigin="1.507,0.436"/>
+                            <TextBlock Text="Bài kiểm tra"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnDictionary" Style="{StaticResource NavButton}" Click="BtnDictionary_Click" Height="47">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE82D;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Từ điển"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnForum" Style="{StaticResource NavButton}" Click="BtnForum_Click" Height="45">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE90A;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Diễn đàn"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Study Stats -->
+                <Border Background="#FFF0D0" CornerRadius="10" Margin="20,20,20,0" Padding="15">
+                    <StackPanel>
+                        <TextBlock Text="Thống kê học tập" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Tiến độ:" Width="100"/>
+                            <TextBlock Text="65%" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Điểm trung bình:" Width="100"/>
+                            <TextBlock Text="8.5" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Ngày học liên tục:" Width="100"/>
+                            <TextBlock Text="5 ngày" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Support Button -->
+                <Border Margin="20,30">
+                    <Button x:Name="btnSupport" Style="{StaticResource SupportButton}" Click="BtnSupport_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE897;" FontFamily="Segoe MDL2 Assets" Margin="0,0,10,0"/>
+                            <TextBlock Text="Hỗ trợ"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Background="#F5F5F5" Margin="0,0,-50,-387">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border Grid.Row="0" Background="White" BorderThickness="0,0,0,1" BorderBrush="#EEEEEE">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Xin chào, Học viên!" FontSize="18" FontWeight="SemiBold" 
+                               VerticalAlignment="Center" Margin="25,0,0,0"/>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                        <Button x:Name="btnNotifications" Style="{StaticResource IconButton}" Margin="5,0" Click="BtnNotifications_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE7E7;" FontFamily="Segoe MDL2 Assets"/>
+                                <Border Background="#FF5722" Width="18" Height="18" CornerRadius="9" 
+                                        Margin="-8,-10,0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                    <TextBlock Text="3" FontSize="10" Foreground="White" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnLogout" Style="{StaticResource IconButton}" Margin="5,0" Click="BtnLogout_Click" ToolTip="Đăng xuất">
+                            <TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
+                        </Button>
+
+                        <Button x:Name="btnProfile" Style="{StaticResource IconButton}" Margin="5,0" Click="BtnProfile_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="32" Height="32">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush Color="#1E88E5"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock x:Name="txtUsername" Text="hung123" VerticalAlignment="Center" Margin="10,0"/>
+                                <TextBlock Text="&#xE0E5;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Dashboard Content -->
+            <ScrollViewer Padding="25" Margin="-9,4,9,4" Grid.Row="1">
+                <StackPanel>
+                    <!-- Welcome Banner -->
+                    <Border Background="#2196F3" CornerRadius="10" Margin="0,0,0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="25,25,0,25">
+                                <TextBlock x:Name="txtWelcome" Text="Chào mừng trở lại, Hung!" 
+                                           FontSize="24" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="Tiếp tục bài học của bạn từ đoạn đã dừng" 
+                                           Foreground="White" Margin="0,10,0,15"/>
+                                <Button Content="Tiếp tục học" Style="{StaticResource ActionButton}" 
+                                        Background="White" Foreground="#2196F3" Width="150" 
+                                        HorizontalAlignment="Left"/>
+                            </StackPanel>
+
+                            <Rectangle Grid.Column="1" Fill="#2196F3" 
+                                   Height="150" Margin="0,0,25,0" VerticalAlignment="Center" RadiusX="5" RadiusY="5"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Current Courses Section -->
+                    <TextBlock Text="Khóa học của tôi" FontSize="20" FontWeight="SemiBold" Margin="0,10,0,15"/>
+
+                    <Grid Height="369">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Course 1 -->
+                        <Border Grid.Column="0" Grid.Row="0" Background="White" CornerRadius="10" 
+                                Margin="0,0,10,20" Padding="20">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock Text="Tiếng Nhật N5 cơ bản" FontWeight="SemiBold" FontSize="16"/>
+                                    <ProgressBar Value="65" Maximum="100" Height="5" VerticalAlignment="Bottom" 
+                                                 Margin="0,25,0,0" Foreground="#4CAF50"/>
+                                </Grid>
+                                <TextBlock Text="Hoàn thành: 65%" Margin="0,10,0,0" Foreground="#666"/>
+                                <TextBlock Text="Bài học tiếp theo: Bài 12 - Các động từ nhóm 2" 
+                                           Margin="0,5,0,10" Foreground="#666"/>
+                                <Button Content="Vào học" Style="{StaticResource OutlineButton}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Course 2 -->
+                        <Border Grid.Column="1" Grid.Row="0" Background="White" CornerRadius="10" 
+                                Margin="10,0,0,20" Padding="20">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock Text="Luyện đọc hiểu N5" FontWeight="SemiBold" FontSize="16"/>
+                                    <ProgressBar Value="30" Maximum="100" Height="5" VerticalAlignment="Bottom" 
+                                                 Margin="0,25,0,0" Foreground="#4CAF50"/>
+                                </Grid>
+                                <TextBlock Text="Hoàn thành: 30%" Margin="0,10,0,0" Foreground="#666"/>
+                                <TextBlock Text="Bài học tiếp theo: Bài 4 - Đọc hiểu văn bản đơn giản" 
+                                           Margin="0,5,0,10" Foreground="#666"/>
+                                <Button Content="Vào học" Style="{StaticResource OutlineButton}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Course 3 -->
+                        <Border Grid.Column="0" Grid.Row="1" Background="White" CornerRadius="10" 
+                                Margin="0,0,10,20" Padding="20">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock Text="Từ vựng N5 chủ đề" FontWeight="SemiBold" FontSize="16"/>
+                                    <ProgressBar Value="50" Maximum="100" Height="5" VerticalAlignment="Bottom" 
+                                                 Margin="0,25,0,0" Foreground="#4CAF50"/>
+                                </Grid>
+                                <TextBlock Text="Hoàn thành: 50%" Margin="0,10,0,0" Foreground="#666"/>
+                                <TextBlock Text="Bài học tiếp theo: Chủ đề 6 - Thức ăn và đồ uống" 
+                                           Margin="0,5,0,10" Foreground="#666"/>
+                                <Button Content="Vào học" Style="{StaticResource OutlineButton}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Explore More Courses -->
+                        <Border Grid.Column="1" Grid.Row="1" Background="#FFF0D0" CornerRadius="10" 
+                                Margin="10,0,0,20" Padding="20">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Khám phá thêm khóa học" FontWeight="SemiBold" FontSize="16" 
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="Tiếng Nhật N4, N3 và nhiều khóa học chuyên đề khác" 
+                                           TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,15" 
+                                           Foreground="#666"/>
+                                <Button Content="Xem khóa học" Style="{StaticResource PrimaryButton}" 
+                                        HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Upcoming Tests Section -->
+                    <TextBlock Text="Bài kiểm tra sắp tới" FontSize="20" FontWeight="SemiBold" Margin="0,10,0,15"/>
+                    <Border Background="White" CornerRadius="10" Padding="20">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Kiểm tra từ vựng N5 - Chương 1-5" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Thời gian: 30 phút | Số câu hỏi: 25" Foreground="#666" 
+                                               Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="1" Text="20/06/2023 - 19:30" VerticalAlignment="Center" 
+                                           Margin="15,0"/>
+
+                                <Button Grid.Column="2" Content="Chuẩn bị" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+
+                            <Separator Margin="0,0,0,15"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Kiểm tra ngữ pháp N5 - Chương 1-3" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Thời gian: 45 phút | Số câu hỏi: 30" Foreground="#666" 
+                                               Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="1" Text="25/06/2023 - 19:30" VerticalAlignment="Center" 
+                                           Margin="15,0"/>
+
+                                <Button Grid.Column="2" Content="Chuẩn bị" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Learning Streak -->
+                    <TextBlock Text="Thành tích học tập" FontSize="20" FontWeight="SemiBold" Margin="0,20,0,15"/>
+                    <Border Background="White" CornerRadius="10" Padding="20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                <StackPanel Margin="0,0,30,0">
+                                    <TextBlock Text="5" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" 
+                                               Foreground="#FF8C00"/>
+                                    <TextBlock Text="Ngày liên tiếp" HorizontalAlignment="Center" Foreground="#666"/>
+                                </StackPanel>
+
+                                <StackPanel Margin="30,0">
+                                    <TextBlock Text="25" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" 
+                                               Foreground="#FF8C00"/>
+                                    <TextBlock Text="Bài học hoàn thành" HorizontalAlignment="Center" Foreground="#666"/>
+                                </StackPanel>
+
+                                <StackPanel Margin="30,0,0,0">
+                                    <TextBlock Text="320" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" 
+                                               Foreground="#FF8C00"/>
+                                    <TextBlock Text="Từ vựng đã học" HorizontalAlignment="Center" Foreground="#666"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Text="Tiếp tục duy trì thành tích học tập mỗi ngày để nhận thêm phần thưởng!" 
+                                       TextAlignment="Center" Foreground="#666"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window> 
