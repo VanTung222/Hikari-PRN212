@@ -131,9 +131,9 @@ GO
 -- Test table
 CREATE TABLE Test (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    jlptLevel VARCHAR(10) NOT NULL CHECK (jlptLevel IN ('N5', 'N4', 'N3', 'N2', 'N1')),
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
+    jlptLevel NVARCHAR(10) NOT NULL CHECK (jlptLevel IN ('N5', 'N4', 'N3', 'N2', 'N1')),
+    title NVARCHAR(255) NOT NULL,
+    description NVARCHAR(255),
     totalMarks DECIMAL(10,2) CHECK (totalMarks >= 0),
     totalQuestions INT CHECK (totalQuestions >= 0),
     isActive BIT DEFAULT 1
@@ -143,11 +143,11 @@ GO
 -- Question table
 CREATE TABLE Question (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    questionText TEXT NOT NULL,
-    optionA VARCHAR(255),
-    optionB VARCHAR(255),
-    optionC VARCHAR(255),
-    optionD VARCHAR(255),
+    questionText NVARCHAR(255) NOT NULL,
+    optionA NVARCHAR(255),
+    optionB NVARCHAR(255),
+    optionC NVARCHAR(255),
+    optionD NVARCHAR(255),
     correctOption CHAR(1) CHECK (correctOption IN ('A', 'B', 'C', 'D')),
     mark DECIMAL(10,2) DEFAULT 1 CHECK (mark >= 0),
     entityType VARCHAR(20) NOT NULL CHECK (entityType IN ('assignment', 'exercise', 'test')),
@@ -292,36 +292,36 @@ GO
 
 -- 9. Test
 INSERT INTO Test (jlptLevel, title, description, totalMarks, totalQuestions, isActive) VALUES
-('N5', 'Bài kiểm tra luyện thi JLPT N5', 'Bài kiểm tra cấp độ sơ cấp dành cho việc chuẩn bị JLPT N5.', 100, 50, 1),
-('N4', 'Bài thi thử JLPT N4', 'Bài kiểm tra trung cấp bao quát chương trình JLPT N4.', 100, 75, 1),
-('N3', 'Đánh giá JLPT N3', 'Bài kiểm tra toàn diện dành cho thí sinh JLPT N3.', 100, 90, 0),
-('N2', 'Bài kiểm tra nâng cao JLPT N2', 'Bài kiểm tra thử thách dành cho người học JLPT N2 nâng cao.', 200.00, 100, 1),
-('N1', 'Bài kiểm tra trình độ JLPT N1', 'Bài kiểm tra cấp độ chuyên gia cho chứng chỉ JLPT N1.', 100, 100, 1);
+(N'N5', N'Bài kiểm tra luyện thi JLPT N5', N'Bài kiểm tra cấp độ sơ cấp dành cho việc chuẩn bị JLPT N5.', 100, 50, 1),
+(N'N4', N'Bài thi thử JLPT N4', N'Bài kiểm tra trung cấp bao quát chương trình JLPT N4.', 100, 75, 1),
+(N'N3', N'Đánh giá JLPT N3', N'Bài kiểm tra toàn diện dành cho thí sinh JLPT N3.', 100, 90, 0),
+(N'N2', N'Bài kiểm tra nâng cao JLPT N2', N'Bài kiểm tra thử thách dành cho người học JLPT N2 nâng cao.', 200.00, 100, 1),
+(N'N1', N'Bài kiểm tra trình độ JLPT N1', N'Bài kiểm tra cấp độ chuyên gia cho chứng chỉ JLPT N1.', 100, 100, 1);
 
 INSERT INTO Question (questionText, optionA, optionB, optionC, optionD, correctOption, mark, entityType, entityID) VALUES
-('N5 Q1: Chọn từ đúng: 「これは___です。」', '本', '車', '家', '犬', 'A', 1.00, 'test', 1),
-('N5 Q2: Chọn câu đúng: 「私は日本人です。」', '私は日本人です。', '日本人です私。', '私は日本人。', '日本人です。', 'A', 1.00, 'test', 1),
-('N5 Q3: Chữ Hán nào là "người"?', '人', '日', '月', '火', 'A', 1.00, 'test', 1),
-('N5 Q4: Dịch: "Tên tôi là Tanaka."', '私の名前は田中です。', '私の名前田中です。', '田中名前です。', '私は田中。', 'A', 1.00, 'test', 1),
-('N5 Q5: Chọn từ trái nghĩa với "高い" (cao):', '低い', '広い', '狭い', '速い', 'A', 1.00, 'test', 1);
+(N'N5 Q1: Chọn từ đúng: 「これは___です。」', N'本', N'車', N'家', N'犬', 'A', 1.00, N'test', 1),
+(N'N5 Q2: Chọn câu đúng: 「私は日本人です。」', N'私は日本人です。', N'日本人です私。', N'私は日本人。', N'日本人です。', 'A', 1.00, N'test', 1),
+(N'N5 Q3: Chữ Hán nào là "người"?', N'人', N'日', N'月', N'火', 'A', 1.00, N'test', 1),
+(N'N5 Q4: Dịch: "Tên tôi là Tanaka."', N'私の名前は田中です。', N'私の名前田中です。', N'田中名前です。', N'私は田中。', 'A', 1.00, N'test', 1),
+(N'N5 Q5: Chọn từ trái nghĩa với "高い" (cao):', N'低い', N'広い', N'狭い', N'速い', 'A', 1.00, N'test', 1);
 
 INSERT INTO Question (questionText, optionA, optionB, optionC, optionD, correctOption, mark, entityType, entityID) VALUES
-('N4 Q1: Chọn trợ từ phù hợp: 「雨が降って___、行きました。」', 'も', 'から', 'のに', 'ので', 'C', 1.00, 'test', 2),
-('N4 Q2: Chọn câu đúng về ý nghĩa 「～てしまう」:', 'Làm xong hết', 'Đáng tiếc đã làm mất', 'Cả A và B', 'Chỉ A', 'C', 1.00, 'test', 2),
-('N4 Q3: Chữ Hán nào là "ga/nhà ga"?', '駅', '店', '家', '道', 'A', 1.00, 'test', 2),
-('N4 Q4: Dịch: "Tôi có thể nói tiếng Nhật một chút."', '日本語が少し話せます。', '日本語を少し話します。', '日本語が少し話します。', '日本語は少し話します。', 'A', 1.00, 'test', 2),
-('N4 Q5: Chọn từ đồng nghĩa với "たくさん":', 'たくさん', 'たくさんあります', 'たくさんいます', 'たくさんではない', 'A', 1.00, 'test', 2);
+(N'N4 Q1: Chọn trợ từ phù hợp: 「雨が降って___、行きました。」', N'も', N'から', N'のに', N'ので', 'C', 1.00, N'test', 2),
+(N'N4 Q2: Chọn câu đúng về ý nghĩa 「～てしまう」:', N'Làm xong hết', N'Đáng tiếc đã làm mất', N'Cả A và B', N'Chỉ A', 'C', 1.00, N'test', 2),
+(N'N4 Q3: Chữ Hán nào là "ga/nhà ga"?', N'駅', N'店', N'家', N'道', 'A', 1.00, N'test', 2),
+(N'N4 Q4: Dịch: "Tôi có thể nói tiếng Nhật một chút."', N'日本語が少し話せます。', N'日本語を少し話します。', N'日本語が少し話します。', N'日本語は少し話します。', 'A', 1.00, N'test', 2),
+(N'N4 Q5: Chọn từ đồng nghĩa với "たくさん":', N'たくさん', N'たくさんあります', N'たくさんいます', N'たくさんではない', 'A', 1.00, N'test', 2);
 
 INSERT INTO Question (questionText, optionA, optionB, optionC, optionD, correctOption, mark, entityType, entityID) VALUES
-('N3 Q1: Ý nghĩa của cấu trúc 「～わけがない」?', 'Không thể nào (không có lý do)', 'Không có ý định', 'Không cần thiết', 'Không phải là không', 'A', 1.00, 'test', 3),
-('N3 Q2: Chọn từ phù hợp: 「彼は日本語を勉強した___、話せるようになった。」', 'おかげで', 'せいで', 'わりに', 'にもかかわらず', 'A', 1.00, 'test', 3),
-('N3 Q3: Chữ Hán nào là "kinh nghiệm"?', '経験', '経済', '経営', '計算', 'A', 1.00, 'test', 3),
-('N3 Q4: Dịch: "Anh ấy có vẻ không khỏe."', '彼は元気がないようだ。', '彼は元気がありません。', '彼は元気じゃない。', '彼は元気ではない。', 'A', 1.00, 'test', 3),
-('N3 Q5: Chọn câu đúng khi muốn nói "có thể nhìn thấy" một cách tự nhiên:', '見える', '見られる', '見る', '見ます', 'A', 1.00, 'test', 3);
+(N'N3 Q1: Ý nghĩa của cấu trúc 「～わけがない」?', N'Không thể nào (không có lý do)', N'Không có ý định', N'Không cần thiết', N'Không phải là không', 'A', 1.00, N'test', 3),
+(N'N3 Q2: Chọn từ phù hợp: 「彼は日本語を勉強した___、話せるようになった。」', N'おかげで', N'せいで', N'わりに', N'にもかかわらず', 'A', 1.00, N'test', 3),
+(N'N3 Q3: Chữ Hán nào là "kinh nghiệm"?', N'経験', N'経済', N'経営', N'計算', 'A', 1.00, N'test', 3),
+(N'N3 Q4: Dịch: "Anh ấy có vẻ không khỏe."', N'彼は元気がないようだ。', N'彼は元気がありません。', N'彼は元気じゃない。', N'彼は元気ではない。', 'A', 1.00, N'test', 3),
+(N'N3 Q5: Chọn câu đúng khi muốn nói "có thể nhìn thấy" một cách tự nhiên:', N'見える', N'見られる', N'見る', N'見ます', 'A', 1.00, N'test', 3);
 
 INSERT INTO Question (questionText, optionA, optionB, optionC, optionD, correctOption, mark, entityType, entityID) VALUES
-('N2 Q1: Ý nghĩa của cấu trúc 「～どころではない」?', 'Không phải lúc/không thể làm gì đó', 'Không phải nơi nào đó', 'Không phải là không làm', 'Không có chỗ nào', 'A', 1.00, 'test', 4),
-('N2 Q2: Chọn từ phù hợp: 「彼は仕事___、食事もとらない。」', 'ばかりか', 'ばかりに', 'ばかりでなく', 'ばかりだ', 'C', 1.00, 'test', 4),
-('N2 Q3: Chữ Hán nào là "công việc"?', '仕事', '使用', '仕方', '資本', 'A', 1.00, 'test', 4),
-('N2 Q4: Dịch: "Dù trời mưa nhưng anh ấy vẫn đi ra ngoài."', '雨なのに彼は出かけた。', '雨だから彼は出かけた。', '雨が降って彼は出かけた。', '雨が降ると彼は出かけた。', 'A', 1.00, 'test', 4),
-('N2 Q5: Chọn cách diễn đạt đúng khi muốn thể hiện một điều hiển nhiên:', '～に決まっている', '～はずだ', '～ことだ', '～だろう', 'A', 1.00, 'test', 4);
+(N'N2 Q1: Ý nghĩa của cấu trúc 「～どころではない」?', N'Không phải lúc/không thể làm gì đó', N'Không phải nơi nào đó', N'Không phải là không làm', N'Không có chỗ nào', 'A', 1.00, N'test', 4),
+(N'N2 Q2: Chọn từ phù hợp: 「彼は仕事___、食事もとらない。」', N'ばかりか', N'ばかりに', N'ばかりでなく', N'ばかりだ', 'C', 1.00, N'test', 4),
+(N'N2 Q3: Chữ Hán nào là "công việc"?', N'仕事', N'使用', N'仕方', N'資本', 'A', 1.00, N'test', 4),
+(N'N2 Q4: Dịch: "Dù trời mưa nhưng anh ấy vẫn đi ra ngoài."', N'雨なのに彼は出かけた。', N'雨だから彼は出かけた。', N'雨が降って彼は出かけた。', N'雨が降ると彼は出かけた。', 'A', 1.00, N'test', 4),
+(N'N2 Q5: Chọn cách diễn đạt đúng khi muốn thể hiện một điều hiển nhiên:', N'～に決まっている', N'～はずだ', N'～ことだ', N'～だろう', 'A', 1.00, N'test', 4);
