@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HikariDataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLayer;
+namespace HikariDataAccess;
 
 public partial class HikariContext : DbContext
 {
@@ -26,6 +26,8 @@ public partial class HikariContext : DbContext
     public virtual DbSet<Discount> Discounts { get; set; }
 
     public virtual DbSet<Document> Documents { get; set; }
+
+    public virtual DbSet<Exercise> Exercises { get; set; }
 
     public virtual DbSet<Lesson> Lessons { get; set; }
 
@@ -120,6 +122,23 @@ public partial class HikariContext : DbContext
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Course_En__stude__4F7CD00D");
+        });
+
+        modelBuilder.Entity<Exercise>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Exercise");
+
+            entity.ToTable("Exercise");
+
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.Property(e => e.LessonId).HasColumnName("LessonId");
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.Description).HasColumnType("nvarchar(max)");
+            entity.Property(e => e.PassMark).HasColumnName("PassMark");
+
+            entity.HasOne(d => d.Lesson).WithOne(p => p.Exercise)
+                .HasForeignKey<Exercise>(d => d.LessonId)
+                .HasConstraintName("FK_Exercise_Lesson");
         });
 
         modelBuilder.Entity<CourseReview>(entity =>

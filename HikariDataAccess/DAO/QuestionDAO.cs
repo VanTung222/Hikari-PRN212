@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayer;
+using HikariDataAccess;
 using HikariDataAccess.Entities;
 
 namespace HikariDataAccess.DAO
