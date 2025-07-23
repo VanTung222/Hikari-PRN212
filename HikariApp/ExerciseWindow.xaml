@@ -1,0 +1,98 @@
+<Window x:Class="HikariApp.ExerciseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikariApp"
+        mc:Ignorable="d"
+        Title="Làm bài tập"
+        Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F6F8">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005A9C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock x:Name="ExerciseTitleTextBlock" Text="Tiêu đề bài tập" FontSize="24" FontWeight="Bold" Foreground="#333"/>
+            <TextBlock x:Name="ExerciseDescriptionTextBlock" Text="Mô tả bài tập..." FontSize="15" Foreground="#666" TextWrapping="Wrap" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="QuestionsItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="{Binding QuestionText}" FontWeight="SemiBold" FontSize="16" TextWrapping="Wrap"/>
+                                <StackPanel Margin="0,10,0,0">
+                                    <RadioButton Tag="A" GroupName="{Binding Id}" Margin="5" VerticalContentAlignment="Center">
+                                        <TextBlock TextWrapping="Wrap">
+                                            <Run Text="A." FontWeight="Bold"/>
+                                            <Run Text=" "/>
+                                            <Run Text="{Binding OptionA}"/>
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton Tag="B" GroupName="{Binding Id}" Margin="5" VerticalContentAlignment="Center">
+                                        <TextBlock TextWrapping="Wrap">
+                                            <Run Text="B." FontWeight="Bold"/>
+                                            <Run Text=" "/>
+                                            <Run Text="{Binding OptionB}"/>
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton Tag="C" GroupName="{Binding Id}" Margin="5" VerticalContentAlignment="Center">
+                                        <TextBlock TextWrapping="Wrap">
+                                            <Run Text="C." FontWeight="Bold"/>
+                                            <Run Text=" "/>
+                                            <Run Text="{Binding OptionC}"/>
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton Tag="D" GroupName="{Binding Id}" Margin="5" VerticalContentAlignment="Center">
+                                        <TextBlock TextWrapping="Wrap">
+                                            <Run Text="D." FontWeight="Bold"/>
+                                            <Run Text=" "/>
+                                            <Run Text="{Binding OptionD}"/>
+                                        </TextBlock>
+                                    </RadioButton>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Button Grid.Row="2" Content="Nộp bài" HorizontalAlignment="Center" Margin="0,20,0,0" Click="SubmitButton_Click"/>
+
+    </Grid>
+</Window>

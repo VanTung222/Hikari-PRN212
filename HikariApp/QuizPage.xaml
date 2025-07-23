@@ -1,0 +1,186 @@
+﻿<Window x:Class="HikariApp.QuizPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HikariApp"
+        mc:Ignorable="d"
+        Title="Làm bài kiểm tra - Học Tiếng Nhật Online"
+        Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#FF6B35"/>
+        <SolidColorBrush x:Key="PrimaryDarkColor" Color="#E55A2B"/>
+        <SolidColorBrush x:Key="CardBackground" Color="White"/>
+        <SolidColorBrush x:Key="HoverBackground" Color="#F8F9FA"/>
+        <SolidColorBrush x:Key="TextGray" Color="#666"/>
+        <SolidColorBrush x:Key="TextDark" Color="#333"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#CCCCCC"/>
+        <SolidColorBrush x:Key="LightGrayBackground" Color="#FFF9F9F9"/>
+        <SolidColorBrush x:Key="InfoBoxBackground" Color="#F8F9FA"/>
+        <SolidColorBrush x:Key="SecondaryButtonColor" Color="#6C757D"/>
+        <SolidColorBrush x:Key="SuccessButtonColor" Color="#28A745"/>
+        <SolidColorBrush x:Key="DangerButtonColor" Color="#CC3333"/>
+        <SolidColorBrush x:Key="OptionBorderColor" Color="#E0E0E0"/>
+
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource SecondaryButtonColor}"/>
+        </Style>
+
+        <Style x:Key="SuccessButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource SuccessButtonColor}"/>
+        </Style>
+
+        <Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="25"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <Style x:Key="QuizOptionStyle" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionBorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse x:Name="checkMark" Width="18" Height="18" Stroke="{StaticResource TextGray}" StrokeThickness="1.5"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource HoverBackground}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                                <Setter TargetName="checkMark" Property="Stroke" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryColor}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                                <Setter TargetName="checkMark" Property="Fill" Value="White"/>
+                                <Setter TargetName="checkMark" Property="Stroke" Value="White"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryDarkColor}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryDarkColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MessageTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,15,0,0"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="20" Background="{StaticResource LightGrayBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorderStyle}" Padding="20">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock x:Name="TestTitle" Text="Tên bài kiểm tra" FontSize="28" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock x:Name="TestDescription" Text="Mô tả bài kiểm tra sẽ hiển thị ở đây." FontSize="16" Foreground="{StaticResource TextGray}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock x:Name="QuestionNumber" Text="Câu hỏi 1/10" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource TextDark}" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="QuestionText" Text="Nội dung câu hỏi sẽ hiển thị ở đây?"
+                               TextWrapping="Wrap" FontSize="20" Foreground="{StaticResource TextDark}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,20">
+                <StackPanel x:Name="OptionsPanel">
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BackButton" Grid.Column="0" Click="BackButton_Click" Style="{StaticResource SecondaryButtonStyle}" Content="Quay lại" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+
+            <Border x:Name="MessageBorder" Grid.Column="1" Grid.ColumnSpan="4" Background="#D4EDDA" BorderBrush="#C3E6CB" BorderThickness="1" CornerRadius="6" Padding="12" Visibility="Collapsed" Margin="0,0,0,20">
+                <TextBlock x:Name="MessageText" Text="[Thông báo hoặc kết quả bài làm sẽ hiển thị ở đây]" Foreground="#155724" Style="{StaticResource MessageTextStyle}"/>
+            </Border>
+
+            <Button x:Name="PreviousButton" Grid.Column="2" Click="PreviousButton_Click" Style="{StaticResource SecondaryButtonStyle}" Content="Câu trước" Margin="0,0,10,0"/>
+            <Button x:Name="NextButton" Grid.Column="3" Click="NextButton_Click" Style="{StaticResource PrimaryButtonStyle}" Content="Câu tiếp theo" Margin="0,0,10,0"/>
+            <Button x:Name="SubmitButton" Grid.Column="4" Click="SubmitButton_Click" Style="{StaticResource SuccessButtonStyle}" Content="Nộp bài"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,121 @@
+<Window x:Class="HikariApp.Views.Admin.ReviewDetailsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Chi Tiết Đánh Giá" Height="500" Width="600"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryBlue" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="LightGray" Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="Gold" Color="#FFD700"/>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="120"/>
+        </Style>
+
+        <Style x:Key="ValueStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBlue}" CornerRadius="8" Padding="15" Margin="0,0,0,20">
+            <TextBlock Text="THÔNG TIN CHI TIẾT ĐÁNH GIÁ" Foreground="White" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="20" BorderBrush="{StaticResource LightGray}" BorderThickness="1">
+            <StackPanel>
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="ID Đánh Giá:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Grid.Column="1" Name="IdTextBlock" Style="{StaticResource ValueStyle}"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Người Đánh Giá:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Grid.Column="1" Name="StudentNameTextBlock" Style="{StaticResource ValueStyle}" FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Khóa Học:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Grid.Column="1" Name="CourseNameTextBlock" Style="{StaticResource ValueStyle}"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Điểm Đánh Giá:" Style="{StaticResource LabelStyle}"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Name="RatingTextBlock" Style="{StaticResource ValueStyle}" FontWeight="Bold" Foreground="{StaticResource Gold}" FontSize="16"/>
+                        <TextBlock Text=" ⭐" FontSize="16" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Ngày Đánh Giá:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Grid.Column="1" Name="ReviewDateTextBlock" Style="{StaticResource ValueStyle}"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Trạng Thái:" Style="{StaticResource LabelStyle}"/>
+                    <Border Name="StatusBorder" CornerRadius="12" Padding="8,4" HorizontalAlignment="Left">
+                        <TextBlock Name="StatusTextBlock" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                    </Border>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Bình Luận:" Style="{StaticResource LabelStyle}" VerticalAlignment="Top" Margin="0,8,10,0"/>
+                    <Border Grid.Column="1" Background="{StaticResource LightGray}" CornerRadius="8" Padding="15">
+                        <TextBlock Name="CommentTextBlock" Style="{StaticResource ValueStyle}" FontStyle="Italic"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Đóng" Width="100" Height="35" Click="CloseButton_Click" 
+                    Background="#6C757D" Foreground="White" BorderThickness="0" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

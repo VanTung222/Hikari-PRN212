@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccessLayer.Entities;
+namespace HikariDataAccess.Entities;
 
 public partial class UserAccount
 {
@@ -24,7 +24,8 @@ public partial class UserAccount
     public string? Phone { get; set; }
 
     public DateOnly? BirthDate { get; set; }
-
+    
+    public Boolean IsActive { get; set; } = true;
     public virtual ICollection<CourseReview> CourseReviews { get; set; } = new List<CourseReview>();
 
     public virtual Student? Student { get; set; }

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema; // Required for [NotMapped]
 
-namespace DataAccessLayer.Entities;
+namespace HikariDataAccess.Entities;
 
 public partial class Lesson
 {
@@ -23,7 +24,12 @@ public partial class Lesson
 
     public virtual Course Course { get; set; } = null!;
 
+    public virtual Exercise? Exercise { get; set; }
+
     public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
 
     public virtual ICollection<Progress> Progresses { get; set; } = new List<Progress>();
+
+    [NotMapped] // This property is for UI logic and not stored in the database
+    public bool IsCompletedByUser { get; set; }
 }

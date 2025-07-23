@@ -1,0 +1,143 @@
+<Window x:Class="HikariApp.Views.Admin.EditPaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Chỉnh Sửa Thanh Toán" Height="592" Width="550"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryBlue" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="Green" Color="#5CB85C"/>
+        <SolidColorBrush x:Key="LightGray" Color="#F5F5F5"/>
+        
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="120"/>
+        </Style>
+        
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#DDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBlue}" CornerRadius="8" Padding="15" Margin="0,0,0,20">
+            <TextBlock Text="CHỈNH SỬA THÔNG TIN THANH TOÁN" Foreground="White" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="20" BorderBrush="{StaticResource LightGray}" BorderThickness="1">
+            <StackPanel>
+                <!-- Payment ID (Read-only) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="ID Thanh Toán:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Name="IdTextBox" Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Background="{StaticResource LightGray}"/>
+                </Grid>
+
+                <!-- Payment Code (Read-only) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Mã Thanh Toán:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Name="PaymentCodeTextBox" Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Background="{StaticResource LightGray}"/>
+                </Grid>
+
+                <!-- Student Name (Read-only) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Học Viên:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Name="StudentNameTextBox" Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Background="{StaticResource LightGray}"/>
+                </Grid>
+
+                <!-- Course Name (Read-only) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Khóa Học:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Name="CourseNameTextBox" Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Background="{StaticResource LightGray}"/>
+                </Grid>
+
+                <!-- Amount (Read-only) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Số Tiền:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Grid.Column="1" Name="AmountTextBox" Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Background="{StaticResource LightGray}"/>
+                </Grid>
+
+                <!-- Payment Method (Editable) -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Phương Thức:" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox Grid.Column="1" Name="PaymentMethodComboBox" Height="35" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Chuyển khoản"/>
+                        <ComboBoxItem Content="Tiền mặt"/>
+                        <ComboBoxItem Content="Thẻ tín dụng"/>
+                        <ComboBoxItem Content="Ví điện tử"/>
+                    </ComboBox>
+                </Grid>
+
+                <!-- Payment Status (Editable) -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Trạng Thái:" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox Grid.Column="1" Name="StatusComboBox" Height="35" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Hoàn thành"/>
+                        <ComboBoxItem Content="Đang xử lý"/>
+                        <ComboBoxItem Content="Thất bại"/>
+                        <ComboBoxItem Content="Đã hủy"/>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Lưu" Style="{StaticResource ButtonStyle}" Background="{StaticResource Green}" Foreground="White" Click="SaveButton_Click"/>
+            <Button Content="Hủy" Style="{StaticResource ButtonStyle}" Background="#6C757D" Foreground="White" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
