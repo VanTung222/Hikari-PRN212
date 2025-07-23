@@ -1,0 +1,302 @@
+<Window x:Class="HikariApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hikari Learning - Trang Chủ" 
+        Height="720" 
+        Width="1280"
+        MinHeight="600"
+        MinWidth="1024"
+        WindowStartupLocation="CenterScreen" 
+        Background="#F5F5F5"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow">
+
+    <Window.Resources>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#45a049"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#757575"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#616161"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#F44336"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D32F2F"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,-73">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#2196F3" Height="70">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Nút Quay lại học viên -->
+                <Button x:Name="btnBackToStudent" Content="← Quay lại học viên" 
+                        Click="BtnBackToStudent_Click"
+                        Background="#FF8C00" Foreground="White" 
+                        FontWeight="Bold" Padding="10,5" 
+                        Margin="10,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Visibility="Collapsed"/>
+
+                <!-- Tiêu đề -->
+                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="HIKARI LEARNING" FontSize="24" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="Hệ thống học tập trực tuyến" FontSize="14" Foreground="White"/>
+                </StackPanel>
+
+                <!-- User Info + Logout -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
+                    <!-- User Info -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                        <Border Width="40" Height="40" 
+                               CornerRadius="20" 
+                               Background="#E0E0E0"
+                               Margin="0,0,10,0">
+                            <Image x:Name="imgUserAvatar" 
+                                  Stretch="UniformToFill"
+                                  Width="40" Height="40">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
+                                </Image.Clip>
+                            </Image>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,20,0">
+                            <TextBlock x:Name="txtWelcome" 
+                                      Text="Chào mừng!" 
+                                      FontSize="14" 
+                                      FontWeight="Bold" 
+                                      Foreground="White"/>
+                            <TextBlock x:Name="txtUserRole" 
+                                      Text="Người dùng" 
+                                      FontSize="12" 
+                                      Foreground="White" 
+                                      Opacity="0.8"/>
+                        </StackPanel>
+                        
+                        <!-- Menu Buttons -->
+                        <Button x:Name="btnProfile" 
+                               Content="Thông Tin Cá Nhân" 
+                               Style="{StaticResource ModernButton}" 
+                               Click="BtnProfile_Click" 
+                               Margin="0,0,10,0"/>
+                               
+                        <!-- Logout Button -->
+                        <Button x:Name="btnLogout" 
+                               Content="Đăng Xuất" 
+                               Style="{StaticResource DangerButton}" 
+                               Click="BtnLogout_Click"
+                               ToolTip="Đăng xuất khỏi hệ thống">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Border Grid.Row="1" Padding="40" Margin="16,0,-34,5" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.072"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Welcome Section -->
+                <Border Grid.Row="0" 
+                        Background="White" 
+                        CornerRadius="10" 
+                        Padding="30" 
+                        Margin="-32,-11,32,30"
+                        BorderBrush="#E0E0E0" 
+                        BorderThickness="1">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock x:Name="txtMainWelcome" 
+                                  Text="Chào mừng bạn đến với Hikari Learning!" 
+                                  FontSize="24" 
+                                  FontWeight="Bold" 
+                                  HorizontalAlignment="Center" 
+                                  Foreground="#333" 
+                                  Margin="0,0,0,10"/>
+                        <TextBlock x:Name="txtUserInfo" 
+                                  Text="Thông tin người dùng sẽ hiển thị ở đây" 
+                                  FontSize="16" 
+                                  HorizontalAlignment="Center" 
+                                  Foreground="#666"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Quick Actions -->
+                <Border 
+                        Background="White" 
+                        CornerRadius="10" 
+                        Padding="30" 
+                        BorderBrush="#E0E0E0" 
+                        BorderThickness="1" Margin="-28,105,28,40" Grid.RowSpan="2">
+                    <StackPanel>
+                        <TextBlock Text="Thao Tác Nhanh" 
+                                  FontSize="20" 
+                                  FontWeight="Bold" 
+                                  Margin="0,0,0,20" 
+                                  Foreground="#333"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Profile Management -->
+                            <Border Grid.Column="0" 
+                                    Background="#F8F9FA" 
+                                    CornerRadius="8" 
+                                    Padding="20" 
+                                    Margin="0,0,10,0"
+                                    BorderBrush="#E9ECEF" 
+                                    BorderThickness="1">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="👤" 
+                                              FontSize="48" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10"/>
+                                    <TextBlock Text="Quản Lý Thông Tin" 
+                                              FontSize="16" 
+                                              FontWeight="Bold" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10" 
+                                              Foreground="#333"/>
+                                    <TextBlock Text="Cập nhật thông tin cá nhân, ảnh đại diện và đổi mật khẩu" 
+                                              FontSize="12" 
+                                              TextWrapping="Wrap" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,15" 
+                                              Foreground="#666"/>
+                                    <Button Content="Mở Thông Tin" 
+                                           Style="{StaticResource ModernButton}" 
+                                           Click="BtnProfile_Click"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Password Reset -->
+                            <Border Grid.Column="1" 
+                                    Background="#F8F9FA" 
+                                    CornerRadius="8" 
+                                    Padding="20" 
+                                    Margin="5,0,5,0"
+                                    BorderBrush="#E9ECEF" 
+                                    BorderThickness="1">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="🔐" 
+                                              FontSize="48" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10"/>
+                                    <TextBlock Text="Bảo Mật" 
+                                              FontSize="16" 
+                                              FontWeight="Bold" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10" 
+                                              Foreground="#333"/>
+                                    <TextBlock Text="Đổi mật khẩu và quản lý bảo mật tài khoản" 
+                                              FontSize="12" 
+                                              TextWrapping="Wrap" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,15" 
+                                              Foreground="#666"/>
+                                    <Button Content="Đổi Mật Khẩu" 
+                                           Style="{StaticResource SecondaryButton}" 
+                                           Click="BtnChangePassword_Click"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Help -->
+                            <Border Grid.Column="2" 
+                                    Background="#F8F9FA" 
+                                    CornerRadius="8" 
+                                    Padding="20" 
+                                    Margin="10,0,0,0"
+                                    BorderBrush="#E9ECEF" 
+                                    BorderThickness="1">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="❓" 
+                                              FontSize="48" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10"/>
+                                    <TextBlock Text="Trợ Giúp" 
+                                              FontSize="16" 
+                                              FontWeight="Bold" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,10" 
+                                              Foreground="#333"/>
+                                    <TextBlock Text="Hướng dẫn sử dụng và hỗ trợ kỹ thuật" 
+                                              FontSize="12" 
+                                              TextWrapping="Wrap" 
+                                              HorizontalAlignment="Center" 
+                                              Margin="0,0,0,15" 
+                                              Foreground="#666"/>
+                                    <Button Content="Xem Hướng Dẫn" 
+                                           Style="{StaticResource SecondaryButton}" 
+                                           Click="BtnHelp_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

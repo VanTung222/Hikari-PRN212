@@ -1,0 +1,102 @@
+﻿<Window x:Class="HikariApp.Teacher.AddEditCourse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Thêm/Sửa Khóa Học" 
+        WindowState="Maximized"
+        Background="#FFF8F9FA">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF4A90E2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,8"/>
+            <Setter Property="BorderBrush" Value="#FFDDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="45"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="45"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Border Background="White" CornerRadius="20" Margin="100" Padding="60">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" Direction="270" ShadowDepth="5" Opacity="0.2" BlurRadius="20"/>
+                </Border.Effect>
+
+                <StackPanel MaxWidth="800">
+                    <!-- Header -->
+                    <TextBlock x:Name="WindowTitle" Text="THÊM KHÓA HỌC MỚI" FontSize="32" FontWeight="Bold" 
+                               Foreground="#FF3366CC" HorizontalAlignment="Center" Margin="0,0,0,40"/>
+
+                    <!-- Form Fields -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Mã khóa học" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtCourseID" IsReadOnly="True" Background="#FFF5F5F5"/>
+
+                            <TextBlock Text="Tên khóa học" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
+                            <TextBox x:Name="txtTitle"/>
+
+                            <TextBlock Text="Học phí (VNĐ)" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
+                            <TextBox x:Name="txtFee"/>
+
+                            <TextBlock Text="Ngày bắt đầu" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
+                            <DatePicker x:Name="dpStartDate"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Thời lượng (giờ)" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtDuration"/>
+
+                            <TextBlock Text="Mô tả khóa học" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
+                            <TextBox x:Name="txtDescription" Height="120" TextWrapping="Wrap" AcceptsReturn="True" 
+                                     VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBlock Text="Ngày kết thúc" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
+                            <DatePicker x:Name="dpEndDate"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <CheckBox x:Name="chkIsActive" Content="Khóa học đang hoạt động" Margin="0,30,0,0" 
+                              FontSize="16" FontWeight="Bold"/>
+
+                    <!-- Buttons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,50,0,0">
+                        <Button Content="💾 Lưu Khóa Học" Width="180" Height="50" Click="Save_Click"/>
+                        <Button Content="❌ Hủy Bỏ" Width="150" Height="50" Background="#FFCCCCCC" 
+                                Foreground="Black" Click="Cancel_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Window>

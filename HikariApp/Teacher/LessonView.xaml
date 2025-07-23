@@ -1,0 +1,44 @@
+<Window x:Class="HikariApp.Teacher.LessonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="Xem Bài Học"
+        WindowState="Maximized"
+        Background="#FFF8F9FA">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Video luôn cố định ở trên -->
+        <Border Grid.Row="0" Background="White" CornerRadius="15" Padding="20" Margin="0,0,0,20">
+            <StackPanel>
+                <TextBlock x:Name="txtLessonTitle" Text="Tên Bài Học" FontSize="28" FontWeight="Bold" Foreground="#3366CC" Margin="0,0,0,15"/>
+                <wv2:WebView2 x:Name="youtubePlayer" Height="400" Margin="0,0,0,15"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Thông tin bài học và mô tả -->
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Border Background="White" CornerRadius="15" Padding="20" Margin="0,0,0,20">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="0,0,40,0">
+                        <TextBlock Text="⏱️ Thời lượng" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock x:Name="txtDuration" Text="0 phút" FontSize="16"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Trạng thái" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock x:Name="txtStatus" Text="Chưa hoàn thành" FontSize="16"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Background="White" CornerRadius="15" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Mô tả bài học" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="txtDescription" Text="Mô tả bài học sẽ được hiển thị ở đây..." FontSize="14" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using DataAccessLayer.Entities;
+using HikariDataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLayer;
+namespace HikariDataAccess;
 
 public partial class HikariContext : DbContext
 {
@@ -26,6 +27,8 @@ public partial class HikariContext : DbContext
 
     public virtual DbSet<Document> Documents { get; set; }
 
+    public virtual DbSet<Exercise> Exercises { get; set; }
+
     public virtual DbSet<Lesson> Lessons { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
@@ -43,8 +46,17 @@ public partial class HikariContext : DbContext
     public virtual DbSet<UserAccount> UserAccounts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(local);Database=Hikari;UID=sa;PWD=Tung@123456789;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer(GetConnectionString());
 
+    private string GetConnectionString()
+    {
+        IConfiguration config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build();
+        var strConn = config["ConnectionStrings:DefaultConnectionStringDB"];
+        return strConn;
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Course>(entity =>
@@ -110,6 +122,23 @@ public partial class HikariContext : DbContext
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Course_En__stude__4F7CD00D");
+        });
+
+        modelBuilder.Entity<Exercise>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Exercise");
+
+            entity.ToTable("Exercise");
+
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.Property(e => e.LessonId).HasColumnName("LessonId");
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.Description).HasColumnType("nvarchar(max)");
+            entity.Property(e => e.PassMark).HasColumnName("PassMark");
+
+            entity.HasOne(d => d.Lesson).WithOne(p => p.Exercise)
+                .HasForeignKey<Exercise>(d => d.LessonId)
+                .HasConstraintName("FK_Exercise_Lesson");
         });
 
         modelBuilder.Entity<CourseReview>(entity =>
